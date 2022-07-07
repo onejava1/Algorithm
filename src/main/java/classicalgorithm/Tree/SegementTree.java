@@ -1,9 +1,6 @@
 package classicalgorithm.Tree;
 
-import java.net.PortUnreachableException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.Scanner;
 
 /**
  * @author huang.fei
@@ -21,10 +18,10 @@ public class SegementTree {
      */
 
     // 数组的最大数据是5 * 10 ^ 5 所以二叉树的存储个数就是 4 * n
-    int[] f = new int[2000001];
+    int[] f;
 
     // 数组的最大个数
-    int[] a = new int[500001];
+    int[] a;
     /**
      *
      * @param k 在二叉树数组中的下标
@@ -36,6 +33,7 @@ public class SegementTree {
         if (l == r){
             // l == r 代表着已经走到该线段的最底部 也就是叶子节点
             f[k] = a[l];
+            return;
         }
         int mid = (l + r) >> 1;
         // 递归建立左子树
@@ -50,7 +48,7 @@ public class SegementTree {
      * @param k 线段树数组的下标 都是从1开始的
      * @param l 线段数组的左端点 初始规定了的就是1
      * @param r 线段数组的右端点 初始规定了就是n
-     * @param x 数字实际数组的下标
+     * @param x 数字实际在数组的下标
      * @param y 实际数组x位置中的点需要被修改的数值
      */
     public void add(int k, int l, int r, int x, int y){
@@ -89,7 +87,7 @@ public class SegementTree {
             return calculate(k * 2, l, mid, s , t);
         }else if(s > mid){
             // 完全在右边的区间
-            return calculate(k * 2 + 1, mid, r, s , t);
+            return calculate(k * 2 + 1, mid + 1, r, s , t);
         }else {
             // 出现了部分在左子树，部分在右子树的情况
             return calculate(k * 2, l, mid, s, mid) + calculate(k * 2 + 1, mid + 1, r, mid + 1, t);
@@ -97,23 +95,47 @@ public class SegementTree {
     }
 
     public static void main(String[] args) {
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println(LocalDateTime.of(LocalDate.now(), LocalTime.of(now.getHour(), now.getMinute(), 0)));
+        init();
+    }
+
+    private static void init(){
+        SegementTree segementTree = new SegementTree();
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int m = s.nextInt();
+        int[] numbers = new int[n + 1];
+        for (int i = 1; i < numbers.length; i++){
+            numbers[i] = s.nextInt();
+        }
+        int[][] operate = new int[m][3];
+        for (int i = 0; i < m; i++){
+            for (int k = 0; k < 3; k++) {
+                operate[i][k] = s.nextInt();
+            }
+        }
+        segementTree.a = numbers;
+        segementTree.f = new int[4 * n + 1];
+        // 建树
+        segementTree.buildTree(1, 1, n);
+        for (int i = 0; i < operate.length; i++) {
+            if (operate[i][0] == 1){
+                int numbersK = operate[i][1];
+                segementTree.add(1, 1, n, operate[i][1],operate[i][2]);
+            }else {
+                System.out.println(segementTree.calculate(1, 1, n, operate[i][1], operate[i][2]));
+            }
+        }
+//        测试数据
+//        5 5
+//        1 5 4 2 3
+//        1 1 3
+//        2 2 5
+//        1 3 -1
+//        1 4 2
+//        2 1 4
+
 
     }
 
-    private enum test{
-        CSX("CSX");
-        private String name;
-        public String getName(){
-            return this.name;
-        }
-        public void setName(String name){
-            this.name = name;
-        }
-        test(String c){
-            name = c;
-        }
-    }
 
 }

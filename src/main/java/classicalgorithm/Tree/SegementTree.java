@@ -95,6 +95,14 @@ public class SegementTree {
     }
 
     public static void main(String[] args) {
+        //        测试数据
+//        5 5
+//        1 5 4 2 3
+//        1 1 3
+//        2 2 5
+//        1 3 -1
+//        1 4 2
+//        2 1 4
         init();
     }
 
@@ -125,16 +133,6 @@ public class SegementTree {
                 System.out.println(segementTree.calculate(1, 1, n, operate[i][1], operate[i][2]));
             }
         }
-//        测试数据
-//        5 5
-//        1 5 4 2 3
-//        1 1 3
-//        2 2 5
-//        1 3 -1
-//        1 4 2
-//        2 1 4
-
-
     }
 
 

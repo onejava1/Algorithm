@@ -1,35 +1,28 @@
 package leetcode.medium;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class L_3 {
 
     public int lengthOfLongestSubstring(String s) {
-        if (s.equals("") || s == null || s.length() == 0){
-            return 0;
-        }
-        int[] times = new int[128];
-        Arrays.fill(times, -1);
-        int maxWindowSize = 1;
-        int left = 0;
-        int right = 0;
+        Map<Integer, Integer> dict = new HashMap<>();
+        int res = 0;
         int pre = 0;
-        for (right = 0; right < s.length(); right++){
-            int c = s.charAt(right);
-            if (times[c] == -1){
-                maxWindowSize = Math.max((right - left + 1), maxWindowSize);
-                times[c] = right;
+        for (int i = 0; i < s.length(); i++) {
+            int key = s.charAt(i) - 'a';
+            if (dict.containsKey(key)){
+                int preSeameNumberIndex = dict.get(key);
+                pre = preSeameNumberIndex + 1;
+                dict.put(key, i);
             }else {
-                // 出现相等
-                left = times[c] + 1;
-                while (pre < left){
-                    int k = s.charAt(pre++);
-                    times[k] = -1;
-                }
-                times[c] = right;
+                res = Math.max(res, i - pre + 1);
+                dict.put(key, i);
             }
         }
-        return maxWindowSize;
+        return res;
     }
 
     public static void main(String[] args) {

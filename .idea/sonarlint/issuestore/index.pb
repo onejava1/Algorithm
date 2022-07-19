@@ -31,3 +31,11 @@ M
 src/main/java/niuke/BM50.java,d\6\d6a69fb6ea136629cca7547219d04bb7fef85915
 X
 (src/main/java/leetcode/medium/L_729.java,f\c\fcf10e3c9821a7143441ef22be6113d73dc6877f
+e
+5src/main/java/classicalgorithm/Tree/SegementTree.java,1\4\14e2674916e0fb8f179af441abb43bf79f551285
+f
+6src/main/java/classicalgorithm/Tree/segementTree2.java,0\0\005ff4d54a99cd0dc8e5d96cf13e243a900acec3
+^
+.src/main/java/leetcode/Segementtree/L_729.java,f\3\f3f2867388607c4ba7ef473722f820b8fbcedced
+f
+6src/main/java/classicalgorithm/Tree/SegementTree1.java,5\b\5b650faa0c2cc554ae4eaf5e7c95825e63c6d517
